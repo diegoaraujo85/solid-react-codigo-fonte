@@ -1,26 +1,34 @@
-export const Message = ({
-  text,
-  imageUrl,
-  audioUrl,
-}: {
-  text?: string;
-  imageUrl?: string;
-  audioUrl?: string;
-}) => {
-  if (audioUrl) {
-    return (
-      <div>
-        <audio controls>
-          <source src={audioUrl} />
-        </audio>
-      </div>
-    );
-  }
-
+const TextMessage = ({ text }: { text: string }) => {
   return (
     <div>
-      {imageUrl && <img src={imageUrl} />}
+      <p>{text}</p>
+    </div>
+  );
+};
+
+const ImageMessage = ({
+  text,
+  imageUrl,
+}: {
+  text: string;
+  imageUrl: string;
+}) => {
+  return (
+    <div>
+      <img src={imageUrl} />
       {text && <p>{text}</p>}
     </div>
   );
 };
+
+const AudioMessage = ({ audioUrl }: { audioUrl: string }) => {
+  return (
+    <div>
+      <audio controls>
+        <source src={audioUrl} />
+      </audio>
+    </div>
+  );
+};
+
+export { TextMessage, ImageMessage, AudioMessage };
