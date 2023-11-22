@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { User } from "./types";
 
 const useUsers = () => {
@@ -36,14 +36,22 @@ const getOnlyActive = (users: User[]): User[] => {
   );
 };
 
-export const ActiveUsersList = () => {
+const useActiveUsers = () => {
   const { users } = useUsers();
 
-  const weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
+  const activeUsers = useMemo(() => {
+    return getOnlyActive(users);
+  }, [users]);
+
+  return { activeUsers };
+};
+
+export const ActiveUsersList = () => {
+  const { activeUsers } = useActiveUsers();
+
   return (
     <ul>
-      {getOnlyActive(users).map((user) => (
+      {activeUsers.map((user) => (
         <UserItem key={user.id} user={user} />
       ))}
     </ul>
