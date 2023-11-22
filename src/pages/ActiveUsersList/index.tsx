@@ -17,6 +17,16 @@ const useUsers = () => {
   return { users };
 };
 
+const UserItem = ({ user }: { user: User }) => {
+  return (
+    <li>
+      <img src={user.avatarUrl} height={64} alt={user.fullName} />
+      <p>{user.fullName}</p>
+      <small>{user.role}</small>
+    </li>
+  );
+};
+
 export const ActiveUsersList = () => {
   const { users } = useUsers();
 
@@ -29,11 +39,7 @@ export const ActiveUsersList = () => {
           (user) => !user.isBanned && new Date(user.lastActivityAt) >= weekAgo
         )
         .map((user) => (
-          <li key={user.id}>
-            <img src={user.avatarUrl} />
-            <p>{user.fullName}</p>
-            <small>{user.role}</small>
-          </li>
+          <UserItem key={user.id} user={user} />
         ))}
     </ul>
   );
