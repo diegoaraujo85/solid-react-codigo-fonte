@@ -1,4 +1,4 @@
-const TextMessage = ({ text }: { text: string }) => {
+const Text = ({ text }: { text: string }) => {
   return (
     <div>
       <p>{text}</p>
@@ -6,13 +6,7 @@ const TextMessage = ({ text }: { text: string }) => {
   );
 };
 
-const ImageMessage = ({
-  text,
-  imageUrl,
-}: {
-  text: string;
-  imageUrl: string;
-}) => {
+const Image = ({ text, imageUrl }: { text: string; imageUrl: string }) => {
   return (
     <div>
       <img src={imageUrl} />
@@ -21,7 +15,7 @@ const ImageMessage = ({
   );
 };
 
-const AudioMessage = ({ audioUrl }: { audioUrl: string }) => {
+const Audio = ({ audioUrl }: { audioUrl: string }) => {
   return (
     <div>
       <audio controls>
@@ -31,4 +25,10 @@ const AudioMessage = ({ audioUrl }: { audioUrl: string }) => {
   );
 };
 
-export { TextMessage, ImageMessage, AudioMessage };
+const Message = {
+  Text,
+  Image,
+  Audio,
+};
+
+export default Message;
