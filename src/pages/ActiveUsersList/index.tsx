@@ -27,6 +27,15 @@ const UserItem = ({ user }: { user: User }) => {
   );
 };
 
+const getOnlyActive = (users: User[]): User[] => {
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+
+  return users.filter(
+    (user) => !user.isBanned && new Date(user.lastActivityAt) >= weekAgo
+  );
+};
+
 export const ActiveUsersList = () => {
   const { users } = useUsers();
 
@@ -34,13 +43,9 @@ export const ActiveUsersList = () => {
   weekAgo.setDate(weekAgo.getDate() - 7);
   return (
     <ul>
-      {users
-        .filter(
-          (user) => !user.isBanned && new Date(user.lastActivityAt) >= weekAgo
-        )
-        .map((user) => (
-          <UserItem key={user.id} user={user} />
-        ))}
+      {getOnlyActive(users).map((user) => (
+        <UserItem key={user.id} user={user} />
+      ))}
     </ul>
   );
 };
