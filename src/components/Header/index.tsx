@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ActiveUsersList } from "../../pages/ActiveUsersList";
 import Message from "../Message";
 
@@ -28,26 +28,27 @@ const OtherDashboardStuff = () => (
   </div>
 );
 
-const Header = () => {
-  const { pathname } = useLocation();
-
+const Header = ({ children }: { children?: React.ReactNode }) => {
   return (
     <header>
       <Logo />
-      {pathname === "/dashboard" && <Link to="/home">Go to home</Link>}
-      {pathname === "/home" && <Link to="/dashboard">Go to dashboard</Link>}
+      {children}
     </header>
   );
 };
 const HomePage = () => (
   <>
-    <Header />
+    <Header>
+      <Link to="/dashboard">Dashboard</Link>
+    </Header>
     <OtherHomeStuff />
   </>
 );
 const DashboardPage = () => (
   <>
-    <Header />
+    <Header>
+      <Link to="/home">Home</Link>
+    </Header>
     <OtherDashboardStuff />
   </>
 );
