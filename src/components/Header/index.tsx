@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ActiveUsersList } from "../../pages/ActiveUsersList";
 import Message from "../Message";
+import Button from "../Button";
+import { CharCountInput } from "../Input";
 
 const Logo = () => (
   <div>
@@ -25,6 +27,15 @@ const OtherHomeStuff = () => (
 const OtherDashboardStuff = () => (
   <div>
     <h1>Dashboard stuff</h1>
+
+    <Button handleClick={() => {}}>Click</Button>
+
+    <CharCountInput
+      value="Hello, World!"
+      onChange={(e) => {
+        console.log(e.target.value);
+      }}
+    />
   </div>
 );
 
@@ -39,7 +50,7 @@ const Header = ({ children }: { children?: React.ReactNode }) => {
 const HomePage = () => (
   <>
     <Header>
-      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/dashboard">Go to Dashboard</Link>
     </Header>
     <OtherHomeStuff />
   </>
@@ -47,7 +58,7 @@ const HomePage = () => (
 const DashboardPage = () => (
   <>
     <Header>
-      <Link to="/home">Home</Link>
+      <Link to="/home">Go to Home</Link>
     </Header>
     <OtherDashboardStuff />
   </>
