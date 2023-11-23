@@ -1,7 +1,7 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DashboardPage, HomePage } from "../components/Header";
 import { ActiveUsersList } from "../pages/ActiveUsersList";
+import HomePage from "@/pages/Homepage";
+import DashboardPage from "@/pages/Dashboard";
 
 const AppRoutes = () => {
   return (
