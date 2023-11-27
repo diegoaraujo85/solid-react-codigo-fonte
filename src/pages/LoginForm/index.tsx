@@ -1,13 +1,16 @@
-import api from "@/api"
 import { useState } from "react"
 
-const LoginForm = () => {
+type Props = {
+  onSubmit: (email: string, password: string) => Promise<void>
+}
+
+const LoginForm = ({onSubmit}:Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault()
-    await api.login(email, password)
+    await onSubmit(email, password)
   }
 
   return (
@@ -18,3 +21,5 @@ const LoginForm = () => {
     </form>
   )
 }
+
+export default LoginForm
