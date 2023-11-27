@@ -3,26 +3,39 @@ export type Video = {
   duration: number;
   coverUrl: string;
 };
-type Props = {
-  items: Array<Video>;
+
+type LiveStream = {
+  name: string
+  previewUrl: string
+}
+
+type VideoListProps = {
+  items: Array<Video | LiveStream>;
 };
 
-const Thumbnail = ({ video }: { video: Video }) => {
-  const { coverUrl, duration, title } = video;
+type ThumbnailProps = {
+  coverUrl: string
+}
+
+const Thumbnail = ({ coverUrl }: ThumbnailProps) => {
+
   return (
-    <li>
-      <img src={coverUrl} height="64px" alt={title} />
-      <p>{title}</p>
-      <small>{duration}</small>
-    </li>
+      <img src={coverUrl} height="64px" alt='Video Thumbnail' />
   );
 };
-const VideoList = ({ items }: Props) => {
+const VideoList = ({ items }: VideoListProps) => {
   return (
     <ul>
-      {items.map((item) => (
-        <Thumbnail key={item.title} video={item} />
-      ))}
+      {items.map((item) => {
+
+        if ('coverUrl' in item) {
+          // é um vídeo
+          return <Thumbnail key={item.title} coverUrl={item.coverUrl} />
+        } else {
+          // é um stream ao vivo, mas o que podemos fazer com isso?
+          return <Thumbnail key={item.name} coverUrl={item.previewUrl} />
+        }
+      })}
     </ul>
   );
 };
