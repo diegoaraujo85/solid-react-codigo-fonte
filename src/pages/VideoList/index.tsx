@@ -23,6 +23,7 @@ const Thumbnail = ({ coverUrl }: ThumbnailProps) => {
       <img src={coverUrl} height="64px" alt='Video Thumbnail' />
   );
 };
+
 const VideoList = ({ items }: VideoListProps) => {
   return (
     <ul>
@@ -32,7 +33,7 @@ const VideoList = ({ items }: VideoListProps) => {
           // é um vídeo
           return <Thumbnail key={item.title} coverUrl={item.coverUrl} />
         } else {
-          // é um stream ao vivo, mas o que podemos fazer com isso?
+          // é um stream ao vivo
           return <Thumbnail key={item.name} coverUrl={item.previewUrl} />
         }
       })}
